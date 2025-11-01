@@ -22,3 +22,27 @@ export async function addBlog(title:string, content:string) {
         }
     }
 }
+
+export async function editBlog(id: string, title: string, content: string) {
+    try {
+        const newBlog = await prisma.blog.update({
+            where:{
+                id
+            },
+            data: {
+                content,
+                title
+            }
+        });
+    
+        return {
+            success: true,
+            newBlog
+        };
+    } catch(e) {
+        return {
+            success: false,
+            error: "Failed to edit blog"
+        }
+    }
+}

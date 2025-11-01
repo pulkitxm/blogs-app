@@ -1,3 +1,4 @@
+import { EditBlog } from "@/components/edit-blog";
 import { prisma } from "@/lib/primsa";
 import Link from "next/link";
 
@@ -9,7 +10,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-950 flex flex-col items-center py-10">
       <h1 className="text-3xl font-bold text-gray-100 mb-8">All Blogs</h1>
       <div className="flex justify-end w-full max-w-2xl">
-        <Link href={"/create"} className="my-2 cursor-pointer">
+        <Link href={"/create"} className="my-2 cursor-pointer text-white">
           Create Blogs
         </Link>
       </div>
@@ -19,11 +20,20 @@ export default async function Home() {
             key={index}
             className="bg-gray-900 rounded-lg p-6 shadow-md border border-gray-800 hover:shadow-lg transition-shadow duration-200"
           >
-            <h2 className="text-xl font-semibold text-blue-400 mb-2">{blog.title}</h2>
+            <div className="flex justify-between items-center cursor-pointer">
+              <h2 className="text-xl font-semibold text-blue-400 mb-2">{blog.title}</h2>
+              <EditBlog id={blog.id} initialValues={{
+                title: blog.title,
+                content: blog.content
+              }} />
+            </div>
+
             <p className="text-gray-300">{blog.content}</p>
             <div className="flex justify-end mt-3">
               <span className="text-xs text-gray-500">{new Date(blog.createdAt).toLocaleString()}</span>
             </div>
+
+
           </div>
         ))}
       </div>

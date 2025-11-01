@@ -31,7 +31,7 @@ export default function page() {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-950 flex-col">
             <div className="flex w-full max-w-md">
-                <Link href={"/"} className="my-2 cursor-pointer">
+                <Link href={"/"} className="my-2 cursor-pointer text-white">
                     Back
                 </Link>
             </div>
