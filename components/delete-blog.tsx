@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
-export function DeleteBlog({ id }: { id: string }) {
+export function DeleteBlog({ id, onSuccess }: { id: string, onSuccess?: () => void }) {
     const [loading, setloading] = useState(false);
     const router = useRouter();
 
@@ -24,7 +24,11 @@ export function DeleteBlog({ id }: { id: string }) {
 
         try {
             await deleteBlog(id);
-            router.refresh();
+            if (onSuccess) {
+                onSuccess();
+            } else {
+                router.refresh();
+            }
         } finally {
             setloading(false);
         }

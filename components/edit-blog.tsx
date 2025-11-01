@@ -19,7 +19,7 @@ import { editBlog } from "@/app/actions/blogs";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-export function EditBlog({ id, initialValues }: { id: string, initialValues: { title: string, content: string } }) {
+export function EditBlog({ id, initialValues, onSuccess }: { id: string, initialValues: { title: string, content: string }, onSuccess?: () => void }) {
     const [title, settitle] = useState(initialValues.title);
     const [content, setcontent] = useState(initialValues.content);
     const [loading, setloading] = useState(false);
@@ -30,7 +30,11 @@ export function EditBlog({ id, initialValues }: { id: string, initialValues: { t
 
         try {
             await editBlog(id, title, content);
-            router.refresh();
+            if (onSuccess) {
+                onSuccess();
+            } else {
+                router.refresh();
+            }
         } finally {
             setloading(false);
         }
