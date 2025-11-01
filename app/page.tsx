@@ -1,3 +1,4 @@
+import { DeleteBlog } from "@/components/delete-blog";
 import { EditBlog } from "@/components/edit-blog";
 import { prisma } from "@/lib/primsa";
 import Link from "next/link";
@@ -22,10 +23,13 @@ export default async function Home() {
           >
             <div className="flex justify-between items-center cursor-pointer">
               <h2 className="text-xl font-semibold text-blue-400 mb-2">{blog.title}</h2>
+              <div className="flex gap-2">
               <EditBlog id={blog.id} initialValues={{
                 title: blog.title,
                 content: blog.content
               }} />
+              <DeleteBlog id={blog.id}/>
+              </div>
             </div>
 
             <p className="text-gray-300">{blog.content}</p>

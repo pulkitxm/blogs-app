@@ -46,3 +46,23 @@ export async function editBlog(id: string, title: string, content: string) {
         }
     }
 }
+
+export async function deleteBlog(id: string) {
+    try {
+        const newBlog = await prisma.blog.delete({
+            where:{
+                id
+            },
+        });
+    
+        return {
+            success: true,
+            newBlog
+        };
+    } catch(e) {
+        return {
+            success: false,
+            error: "Failed to edit blog"
+        }
+    }
+}
