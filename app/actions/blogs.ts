@@ -68,7 +68,6 @@ export async function deleteBlog(id: string) {
 }
 
 export async function getBlogs() {
-    try {
         const blogs = await prisma.blog.findMany({
             orderBy: {
                 createdAt: 'desc'
@@ -79,11 +78,5 @@ export async function getBlogs() {
             success: true,
             blogs
         };
-    } catch(e) {
-        return {
-            success: false,
-            error: "Failed to fetch blogs",
-            blogs: []
-        }
-    }
+   
 }
